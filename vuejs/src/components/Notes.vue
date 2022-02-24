@@ -1,45 +1,76 @@
 <template>
   <div class="tc-notes-wrapper">
-    <add-new-button />
+    <!-- <add-new-button @addNote="addNote" /> -->
+    <button v-on:click="addNote" class="new-note-btn">New Note</button>
     <div class="tc-notes">
-      <note v-for="(note, index) in notes" :key="index" :note="note"/>
+      <note
+        v-for="(note, id) in notes"
+        :key="id"
+        :note="note"
+        @deleteNote="deleteNote(note.id)"
+        @noteUpdated="noteUpdated"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import AddNewButton from "./AddNewButton";
+// import AddNewButton from "./AddNewButton";
 import Note from "./Note";
+import axios from "axios";
 
 export default {
-  components: {Note, AddNewButton},
-  name: 'Notes',
+  components: { Note },
+  name: "Notes",
   data() {
     return {
-      notes: [
-        {
-          title: "sunt aut facere repellat",
-          body: "uia et suscipit suscipit recusandae consequuntur expedita et cum reprehenderit molestiae ut ut quas totam nostrum rerum est autem sunt rem eveniet architecto",
-        },
-        {
-          title: "qui est esse",
-          body: "est rerum tempore vitae<br>nsequi sint nihil reprehenderit dolor beatae ea dolores neque <br>fugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis<br>qui aperiam non debitis possimus qui neque nisi nulla",
-        },
-        {
-          title: "nesciunt quas odio",
-          body: "repudiandae veniam quaerat sunt sed alias aut fugiat sit autem sed est",
-        },
-        {
-          title: "This is a demo note",
-          body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi corrupti officiis alias tenetur, tenetur iste maxime laudantium?",
-        },
-        {
-          title: "qui est esse",
-          body: "est rerum tempore vitae<br>nsequi sint nihil reprehenderit dolor beatae ea dolores neque <br>fugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis<br>qui aperiam non debitis possimus qui neque nisi nulla",
-        },
-      ],
+      notes: [],
     };
   },
+  methods: {
+    deleteNote(id) {
+      // this.notes.splice(this.notes.indexOf(note), 1);
+      // console.log("deleted");
+      axios.delete(`http://localhost:3000/notes/${id}`);
+      this.notes=this.notes.filter((obj)=>obj.id!==id);
+    },
+
+    async addNote() {
+      /* this.notes.unshift({title:'', body:''}) */
+        try{
+        const res = await axios.post(`http://localhost:3000/notes`, {
+          title: "",
+          text: "",
+        });
+        this.notes = [...this.notes, res.data];
+
+      } catch (error){
+        console.log(error.message);
+      }
+    },
+    noteUpdated(note){
+      axios.put(`http://localhost:3000/notes/${note.id}`,
+      {
+        title: note.title,
+        text: note.text,
+      }
+      )
+    }
+  },
+  async created() {
+    try {
+      const res = await axios.get("http://localhost:3000/notes");
+      this.notes = res.data;
+    } catch (error) {
+      console.log(error.message);
+    }
+  },
+  /* mounted() {
+    fetch("http://localhost:3000/notes")
+    .then(res=> res.json())
+    .then(data => this.notes = data)
+    .catch(err=> console.log(err.message))
+  } */
 };
 </script>
 

@@ -1,10 +1,15 @@
 <template>
-  <button class="new-note-btn"> New Note</button>
+  <button v-on:@click="addNote" class="new-note-btn"> New Note</button>
 </template>
 
 <script>
 export default {
   name: "AddNewButton",
+  methods:{
+    addNote(){
+      this.$emit('addNote');
+    }
+  }
 };
 </script>
 

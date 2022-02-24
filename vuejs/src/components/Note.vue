@@ -1,15 +1,13 @@
 <template>
   <div class="tc-note">
-    <div class="tc-note-header">
-      <span class="tc-note-close">
-        <i class="fas fa-times"></i>
-      </span>
+    <div tabindex="0" class="tc-note-header">
+      <span v-on:click="deleteNote" class="tc-note-close"> X </span>
     </div>
-    <div class="tc-note-title" contenteditable="">
+    <div class="tc-note-title" contenteditable="" @blur="titleChanged">
       {{ note.title }}
     </div>
-    <div class="tc-note-body" contenteditable="">
-      {{ note.body }}
+    <div class="tc-note-body" contenteditable="" @blur="bodyChanged">
+      {{ note.text }}
     </div>
   </div>
 </template>
@@ -21,6 +19,22 @@ export default {
     note: {
       type: Object,
       required: true,
+    },
+  },
+  methods: {
+    /* Instead of deleting the note here, 
+    we just passing the index of a note that needs to be deleted
+    to the parrent */
+    deleteNote(event) {
+      this.$emit("deleteNote", this.note);
+    },
+    titleChanged($event) {
+      this.note.title = $event.target.innerHTML;
+      this.$emit("noteUpdated", this.note);
+    },
+    bodyChanged($event) {
+      this.note.text = $event.target.innerHTML;
+      this.$emit("noteUpdated", this.note);
     },
   },
 };
