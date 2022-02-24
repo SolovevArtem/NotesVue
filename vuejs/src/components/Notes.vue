@@ -32,30 +32,27 @@ export default {
       // this.notes.splice(this.notes.indexOf(note), 1);
       // console.log("deleted");
       axios.delete(`http://localhost:3000/notes/${id}`);
-      this.notes=this.notes.filter((obj)=>obj.id!==id);
+      this.notes = this.notes.filter((obj) => obj.id !== id);
     },
 
     async addNote() {
       /* this.notes.unshift({title:'', body:''}) */
-        try{
+      try {
         const res = await axios.post(`http://localhost:3000/notes`, {
           title: "",
           text: "",
         });
         this.notes = [...this.notes, res.data];
-
-      } catch (error){
+      } catch (error) {
         console.log(error.message);
       }
     },
-    noteUpdated(note){
-      axios.put(`http://localhost:3000/notes/${note.id}`,
-      {
+    noteUpdated(note) {
+      axios.put(`http://localhost:3000/notes/${note.id}`, {
         title: note.title,
         text: note.text,
-      }
-      )
-    }
+      });
+    },
   },
   async created() {
     try {
@@ -104,63 +101,28 @@ export default {
     justify-content: center;
     flex-wrap: wrap;
     margin: 0 auto;
-
-    .tc-note {
-      background-color: #f0c806;
-      border-radius: 8px;
-      width: 280px;
-      margin: 0 10px 20px;
-      box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.2);
-      transition: all 0.5s;
-      cursor: pointer;
-      font-family: "Caveat", cursive;
-
-      .tc-note-header {
-        padding: 10px 16px 0;
-
-        .tc-note-close {
-          display: inline-block;
-          width: 24px;
-          height: 24px;
-          border-radius: 50%;
-          line-height: 24px;
-          text-align: center;
-          transition: all 0.3s;
-
-          &:hover {
-            background-color: rgba(0, 0, 0, 0.2);
-          }
-
-          &:focus {
-            box-shadow: inset 2px 3px 0px rgba(0, 0, 0, 0.8);
-          }
-        }
-
-        .tc-note-close {
-          float: right;
-        }
-      }
-
-      .tc-note-title,
-      .tc-note-body {
-        outline: 0;
-      }
-
-      .tc-note-title {
-        font-size: 24px;
-        padding: 10px 16px;
-        font-weight: bold;
-      }
-
-      .tc-note-body {
-        font-size: 20px;
-        padding: 10px 16px 16px;
-      }
-
-      &:hover {
-        box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.3);
-      }
-    }
   }
+}
+// "Deep" Style selectors to obtain child style property
+/deep/ .tc-note:nth-of-type(1n) {
+  transform: rotate(-5deg);
+  position: relative;
+  top: 5px;
+}
+/deep/ .tc-note:nth-of-type(even) {
+  transform: rotate(4deg);
+  position: relative;
+  top: 5px;
+}
+
+/deep/ .tc-note:nth-of-type(3n) {
+  transform: rotate(-3deg);
+  position: relative;
+  top: -5px;
+}
+/deep/ .tc-note:nth-of-type(5n) {
+  transform: rotate(5deg);
+  position: relative;
+  top: -10px;
 }
 </style>

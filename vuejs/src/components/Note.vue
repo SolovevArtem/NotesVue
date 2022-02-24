@@ -42,14 +42,20 @@ export default {
 
 <style lang="scss" scoped>
 .tc-note {
-  background-color: #f0c806;
-  border-radius: 8px;
-  width: 280px;
+  background-color: #d4b714;
+  border-radius: 1px;
+  width: 225px;
+  height: 225px;
   margin: 0 10px 20px;
   box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.2);
   transition: all 0.5s;
   cursor: pointer;
-  font-family: "Caveat", cursive;
+  &:hover, &:focus {
+    box-shadow: 10px 10px 7px rgba(0, 0, 0, 0.7);
+    transform: scale(1.25);
+    position: relative;
+    z-index: 5;
+  }
 
   .tc-note-header {
     padding: 10px 16px 0;
@@ -77,9 +83,18 @@ export default {
     }
   }
 
-  .tc-note-title,
+  .tc-note-title {
+    outline: 0;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+  }
   .tc-note-body {
     outline: 0;
+    font-family: "Reenie Beanie";
+    font-size: 1.5rem !important;
+    color: black;
   }
 
   .tc-note-title {
@@ -94,7 +109,7 @@ export default {
   }
 
   &:hover {
-    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);
   }
 }
 </style>
