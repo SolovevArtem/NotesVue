@@ -29,7 +29,7 @@ body {
 div#app{
   height: 100% ;
   margin: 0px auto;
-  overflow: auto;
+  overflow:  auto;
   background-color:$base-color;
 }
 </style>
