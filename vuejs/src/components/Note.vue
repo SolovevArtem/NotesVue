@@ -41,12 +41,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$base-color: #219EBC;
+$btn-color: #8ECAE6;
+$nt1-color: #023047;
+$nt2-color: #FFB703;
+$nt3-color: #FB8500;
 .tc-note {
-  background-color: #d4b714;
+  overflow:hidden;
+  background-color: #f3d52f;
   border-radius: 1px;
   width: 225px;
   height: 225px;
-  margin: 0 10px 20px;
+  margin: 0 15px 40px;
   box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.2);
   transition: all 0.5s;
   cursor: pointer;
@@ -109,7 +115,7 @@ export default {
   }
 
   &:hover {
-    box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);
+    box-shadow: 10px 10px 10px 7px rgba(33, 33, 33, 0.7);
   }
 }
 </style>

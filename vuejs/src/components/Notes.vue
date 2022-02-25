@@ -62,32 +62,36 @@ export default {
       console.log(error.message);
     }
   },
-  /* mounted() {
-    fetch("http://localhost:3000/notes")
-    .then(res=> res.json())
-    .then(data => this.notes = data)
-    .catch(err=> console.log(err.message))
-  } */
 };
 </script>
 
 <style lang="scss" scoped>
+$base-color: #219ebc;
+$btn-color: #8ecae6;
+$nt1-color: #023047;
+$nt2-color: #ffb703;
+$nt3-color: #fb8500;
+
 .tc-notes-wrapper {
+  
   .new-note-btn {
     width: 200px;
     display: block;
     margin: 0 auto 20px;
-    background-color: #fff;
+    background-color: $btn-color;
     padding: 10px 32px;
-    border: 1px solid #e0e0e0;
+    border: 3px solid white;
     font-size: 26px;
-    outline: 0;
-    transition: all 0.3s;
+    outline: 2;
+    transition: all 0.5s;
     cursor: pointer;
-    font-family: "Caveat", cursive;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    font-weight: bold;
 
     &:hover {
-      box-shadow: 0 5px 7px rgba(0, 0, 0, 0.1);
+      box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.1);
+      background-color: #4b8098;
+      color: white;
     }
 
     &:active {
@@ -103,26 +107,42 @@ export default {
     margin: 0 auto;
   }
 }
-// "Deep" Style selectors to obtain child style property
-/deep/ .tc-note:nth-of-type(1n) {
+// // "Deep" Style selectors to obtain child style property
+/deep/ .tc-note:nth-of-type(1) {
   transform: rotate(-5deg);
   position: relative;
   top: 5px;
+  background-color: $nt1-color;
+
+  .tc-note-header .tc-note-close,
+  .tc-note-title,
+  .tc-note-body {
+    color: $nt2-color;
+  }
 }
 /deep/ .tc-note:nth-of-type(even) {
   transform: rotate(4deg);
   position: relative;
   top: 5px;
+  background-color: $nt2-color;
 }
 
 /deep/ .tc-note:nth-of-type(3n) {
-  transform: rotate(-3deg);
+  transform: rotate(3deg);
   position: relative;
   top: -5px;
+  background-color: $nt3-color;
 }
 /deep/ .tc-note:nth-of-type(5n) {
-  transform: rotate(5deg);
+  transform: rotate(-5deg);
   position: relative;
   top: -10px;
+  background-color: $nt1-color;
+
+  .tc-note-header .tc-note-close,
+  .tc-note-title,
+  .tc-note-body {
+    color: $nt2-color;
+  }
 }
 </style>
