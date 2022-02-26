@@ -31,14 +31,14 @@ export default {
     deleteNote(id) {
       // this.notes.splice(this.notes.indexOf(note), 1);
       // console.log("deleted");
-      axios.delete(`http://localhost:3000/notes/${id}`);
+      axios.delete(`https://notes-app-json-server.herokuapp.com/notes/${id}`);
       this.notes = this.notes.filter((obj) => obj.id !== id);
     },
 
     async addNote() {
       /* this.notes.unshift({title:'', body:''}) */
       try {
-        const res = await axios.post(`http://localhost:3000/notes`, {
+        const res = await axios.post(`https://notes-app-json-server.herokuapp.com/notes`, {
           title: "",
           text: "",
         });
@@ -47,16 +47,20 @@ export default {
         console.log(error.message);
       }
     },
-    noteUpdated(note) {
-      axios.put(`http://localhost:3000/notes/${note.id}`, {
+    async noteUpdated(note) {
+      try{
+      axios.put(`https://notes-app-json-server.herokuapp.com/notes/${note.id}`, {
         title: note.title,
         text: note.text,
       });
+      } catch (error){
+        console.log(error.message);
+      }
     },
   },
   async created() {
     try {
-      const res = await axios.get("http://localhost:3000/notes");
+      const res = await axios.get("https://notes-app-json-server.herokuapp.com/notes");
       this.notes = res.data;
     } catch (error) {
       console.log(error.message);
