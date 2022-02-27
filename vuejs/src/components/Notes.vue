@@ -3,7 +3,9 @@
     <div class="header">
       <div class="title">Notes App</div>
       <!-- <add-new-button @addNote="addNote" /> -->
-      <button v-on:click="addNote" class="new-note-btn btn">New Note</button>
+      <button v-on:click="addNote" class="new-note-btn btn">
+        <a href="#">New Note</a>
+      </button>
 
       <button class="github btn">
         <a href="https://github.com/SolovevArtem/NotesVue" target="_blank"
@@ -94,72 +96,9 @@ $nt2-color: #ffb703;
 $nt3-color: #fb8500;
 
 .tc-notes-wrapper {
-  .btn {
-    outline: none !important;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    display: inline-block !important;
-
-    .btn-4 {
-  width: 130px;
-  height: 40px;
-  line-height: 42px;
-  padding: 0;
-  border: none;
-}
-.btn-4 span {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-.btn-4:before,
-.btn-4:after {
-  position: absolute;
-  content: "";
-  right: 0;
-  top: 0;
-  background: #000;
-  transition: all 0.3s ease;
-}
-.btn-4:before {
-  height: 50%;
-  width: 2px;
-}
-.btn-4:after {
-  width: 20%;
-  height: 2px;
-}
-.btn-4:hover:before {
-  height: 100%;
-}
-.btn-4:hover:after {
-  width: 100%;
-}
-.btn-4 span:before,
-.btn-4 span:after {
-  position: absolute;
-  content: "";
-  left: 0;
-  bottom: 0;
-  background: #000;
-  transition: all 0.3s ease;
-}
-.btn-4 span:before {
-  width: 2px;
-  height: 50%;
-}
-.btn-4 span:after {
-  width: 20%;
-  height: 2px;
-}
-.btn-4 span:hover:before {
-  height: 100%;
-}
-.btn-4 span:hover:after {
-  width: 100%;
-}
+  a {
+    color: black !important;
+    text-decoration: none;
   }
   .header {
     display: inline-flex;
@@ -168,7 +107,7 @@ $nt3-color: #fb8500;
     width: 50%;
   }
   .github {
-    width: 350px;
+    width: 200px;
     margin: auto 0%;
     display: inline-block;
     background-color: #1fe0;
@@ -180,13 +119,6 @@ $nt3-color: #fb8500;
     font-family: "Amatic SC", cursive;
     font-family: "Roboto Mono", monospace;
     font-family: "Sora", sans-serif;
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    
   }
   .title {
     width: 400px;
@@ -203,14 +135,13 @@ $nt3-color: #fb8500;
     font-family: "Sora", sans-serif;
   }
   .new-note-btn {
-    width: 350px;
-    margin-left: auto;
-    margin-right: 0%;
+    width: 200px;
+    margin: auto 5%;
     display: inline-block;
     background-color: #1fe0;
     color: white;
     border: none;
-    padding: 10px 70px;
+    padding: 10px 20px;
     font-size: 15px;
     cursor: pointer;
     font-family: "Amatic SC", cursive;
@@ -261,6 +192,115 @@ $nt3-color: #fb8500;
   .tc-note-title,
   .tc-note-body {
     color: $nt2-color;
+  }
+}
+
+// BUTTON CSS
+
+$yellow: #ffe800;
+$brown: #404040;
+$blue: #1cd3f8;
+$angle: 8px;
+$angle-o: 4px;
+
+html,
+body {
+  height: 100%;
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  color: #f2f2f2;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $blue;
+}
+
+.btn {
+  
+  top: 0;
+  left: 0;
+  transition: all 0.15s linear 0s;
+  position: relative;
+  display: inline-block;
+  padding: 15px 25px;
+  background-color: $yellow !important;
+
+  text-transform: uppercase;
+  color: $brown;
+  font-family: arial;
+  letter-spacing: 1px;
+
+  box-shadow: -6px 6px 0 $brown;
+  text-decoration: none;
+
+  &:hover {
+    top: 3px;
+    left: -3px;
+    box-shadow: -3px 3px 0 $brown;
+
+    &::after {
+      top: 1px;
+      left: -2px;
+      width: $angle-o;
+      height: $angle-o;
+    }
+
+    &::before {
+      bottom: -2px;
+      right: 1px;
+      width: $angle-o;
+      height: $angle-o;
+    }
+  }
+
+  &::after {
+    transition: all 0.15s linear 0s;
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: -4px;
+    width: $angle;
+    height: $angle;
+    background-color: $brown;
+    transform: rotate(45deg);
+    z-index: -1;
+  }
+
+  &::before {
+    transition: all 0.15s linear 0s;
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    right: 2px;
+    width: $angle;
+    height: $angle;
+    background-color: $brown;
+    transform: rotate(45deg);
+    z-index: -1;
+  }
+}
+
+a.btn {
+  position: relative;
+}
+
+a:active.btn {
+  top: 6px;
+  left: -6px;
+  box-shadow: none;
+
+  &:before {
+    bottom: 1px;
+    right: 1px;
+  }
+
+  &:after {
+    top: 1px;
+    left: 1px;
   }
 }
 </style>
