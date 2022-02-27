@@ -24,11 +24,13 @@ html,
 body {
   width: 100% !important;
   height: 100% !important;
+  margin:auto;
 }
 
 div#app{
   height: 100% ;
-  margin: 0px auto;
+  width: 100%;
+  
   overflow:  auto;
   background-color:$base-color;
 }
